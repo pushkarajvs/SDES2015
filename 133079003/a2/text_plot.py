@@ -35,5 +35,29 @@ def plot_matrix(matrix,test=0):
     if(test==1):
         return(test_build)
         
+def text_plot(x,y,rows=30,columns=80):
+    counter=0
+    for entry in x:
+        if(type(entry)!=float and type(entry)!=int and type(entry)!=long):
+            raise TypeError("All the input values should be numbers.")
+        x[counter]=float(entry)
+        counter=counter+1
     
-
+    counter=0            
+    for entry in y:
+        if(type(entry)!=float and type(entry)!=int and type(entry)!=long):
+            raise TypeError("All the input values should be numbers")
+        y[counter]=float(entry)
+        counter=counter+1
+    
+    if(type(rows)!=int and type(rows)!=long and type(columns)!=int and
+            type(columns)!=long):
+        raise ValueError("Number of rows and columns should be either int or long.")
+    
+    if(len(x)!=len(y)):
+        raise ValueError("both input lists should be of the same size")
+    
+    x=list(x)
+    y=list(y)
+    
+    matrix=return_matrix(rows,columns)
