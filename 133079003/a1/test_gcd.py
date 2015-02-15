@@ -20,6 +20,11 @@ def test_gcd():
         print "All good"
     else:
         print "At least one test failed"
-        
+    try:
+        trash=gcd.gcd("two",-700)
+        print "Failed to raise ValueErrors for both negative and string inputs"
+        flag=1
+    except TypeError:
+        pass
 if(__name__=="__main__"):
     test_gcd()
