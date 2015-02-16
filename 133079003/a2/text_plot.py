@@ -34,7 +34,42 @@ def plot_matrix(matrix,test=0):
             test_build=test_build+build
     if(test==1):
         return(test_build)
-        
+    
+def convert_to_plottable(x,y,rows,columns):
+    length=len(x)
+    
+    range_x=sorted(x)[-1]-sorted(x)[0]
+    range_y=sorted(y)[-1]-sorted(y)[0]
+    
+    expand_x=float(columns)/range_x
+    expand_y=float(rows)/range_y
+    
+    print expand_x
+    print expand_y
+    
+    matrix=return_matrix(rows,columns)
+    
+    print y
+    x_min=sorted(x)[0]
+    y_min=sorted(y)[0]
+    if(x_min<0):
+        for i in range(0,length):
+            x[i]=x[i]+abs(x_min)
+    if(y_min<0):
+        for i in range(0,length):
+            y[i]=y[i]+abs(y_min)
+ 
+    print y
+    for i in range(0,length):
+        index_x=int(round(x[i]*expand_x))
+        index_y=int(round(y[i]*expand_y))        
+        if(index_x>=columns):
+            index_x=columns-1
+        if(index_y>=rows):
+            index_y=rows-1
+        matrix[rows-1-index_y][index_x]=1
+    return matrix
+    
 def text_plot(x,y,rows=30,columns=80):
     counter=0
     for entry in x:
@@ -60,4 +95,17 @@ def text_plot(x,y,rows=30,columns=80):
     x=list(x)
     y=list(y)
     
-    matrix=return_matrix(rows,columns)
+    matrix=convert_to_plottable(x,y,rows,columns)
+    plot_matrix(matrix)
+    
+if(__name__=="__main__"):
+    rows=30
+    columns=80
+    x=range(0,columns)
+    y=[]
+    for i in x:
+        y.append(math.sin(2*math.pi*i/columns))
+    text_plot(x,y,rows,columns)
+    
+    
+    
