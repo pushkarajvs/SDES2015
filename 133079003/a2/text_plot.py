@@ -1,22 +1,33 @@
 #!/usr/bin/env python
 """
-    
+    A module for text-based plotting of an array of values against another array of values.
 """
 import math
-
+#-------------------------------------------------------------------------
 def zeros(size):
+    """
+    Returns a zero list of size length
+    """
     allzeros=[]
     for i in range(0,size):
         allzeros.append(0)
     return allzeros
-
+#-------------------------------------------------------------------------
 def return_matrix(rows,columns):
+    """
+    Returns a matrix list of zeros of size (rows,columns)
+    """
     matrix=[]
     for i in range(0,rows):
         matrix.append(zeros(columns))
     return matrix
-    
+#-------------------------------------------------------------------------
 def plot_matrix(matrix,test=0):
+    """
+    Plots the received matrix based on its non-zero entries.
+    The matrix should contain 1's only where the points are to be plotted.
+    Rest all should be zeroes
+    """
     rows=len(matrix)
     columns=len(matrix[0])
     if(test==1):
@@ -34,8 +45,11 @@ def plot_matrix(matrix,test=0):
             test_build=test_build+build
     if(test==1):
         return(test_build)
-    
+#-------------------------------------------------------------------------    
 def convert_to_plottable(x,y,rows,columns):
+    """
+    Converts 2 user entered lists as x and y indices into ready to plot matrix by considering the total size of the plot available and expanding or contracting the scale accordingly.
+    """
     length=len(x)
     
     range_x=sorted(x)[-1]-sorted(x)[0]
@@ -44,12 +58,8 @@ def convert_to_plottable(x,y,rows,columns):
     expand_x=float(columns)/range_x
     expand_y=float(rows)/range_y
     
-    print expand_x
-    print expand_y
-    
     matrix=return_matrix(rows,columns)
     
-    print y
     x_min=sorted(x)[0]
     y_min=sorted(y)[0]
     if(x_min<0):
@@ -59,7 +69,6 @@ def convert_to_plottable(x,y,rows,columns):
         for i in range(0,length):
             y[i]=y[i]+abs(y_min)
  
-    print y
     for i in range(0,length):
         index_x=int(round(x[i]*expand_x))
         index_y=int(round(y[i]*expand_y))        
@@ -69,8 +78,11 @@ def convert_to_plottable(x,y,rows,columns):
             index_y=rows-1
         matrix[rows-1-index_y][index_x]=1
     return matrix
-    
-def text_plot(x,y,rows=30,columns=80):
+#-------------------------------------------------------------------------    
+def text_plot(x,y,rows=30,columns=80,test=0):
+    """
+    Main text-based plotting function
+    """
     counter=0
     for entry in x:
         if(type(entry)!=float and type(entry)!=int and type(entry)!=long):
@@ -96,8 +108,11 @@ def text_plot(x,y,rows=30,columns=80):
     y=list(y)
     
     matrix=convert_to_plottable(x,y,rows,columns)
-    plot_matrix(matrix)
-    
+    if(test==0):
+        plot_matrix(matrix)
+    else:
+        return(matrix)
+#-------------------------------------------------------------------------    
 if(__name__=="__main__"):
     rows=30
     columns=80
