@@ -31,6 +31,7 @@ class matrix(object):
         self.columns=columns
         self.matrix=create_matrix(self.rows,self.columns)
         self._busy=0
+	self.marker=*
 
     def get_no_of_rows(self):
       	"""
@@ -44,6 +45,12 @@ class matrix(object):
 	"""
       	return self.columns
 
+    def set_marker(self,marker=*):
+      	"""
+	Set the marker used to plot the matrix
+	"""
+	self.marker=marker
+
     def plot_matrix(self,test=0):
         """
         Plots the matrix created during the initialization based on its non-zero entries. The matrix should contain 1's only where the points are to be plotted. Rest all should be zeros.
@@ -54,7 +61,7 @@ class matrix(object):
             build=""
             for j in range(0,self.columns):
             	if(self.matrix[i][j]):
-                    build=build+"*"
+                    build=build+self.marker
             	else:
                     build=build+" "
 	    if(test==0):
