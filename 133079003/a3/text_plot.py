@@ -144,6 +144,18 @@ class matrix(object):
 	    self.columns=columns
 	    self.matrix=create_matrix(rows,columns)
 
+    def set_no_of_rows(self,rows,refresh_plot=0):
+      	"""
+	Set number of rows
+	"""
+	self.set_size(rows,self.columns,refresh_plot)
+
+    def set_no_of_columns(self,columns,refresh_plot=0):
+      	"""
+	Set number of columns
+	"""
+	self.set_size(self.rows,columns,refresh_plot)
+
 def plot(x,y,rows=30,columns=80,test=0):
     """
     General text-based plotting function
