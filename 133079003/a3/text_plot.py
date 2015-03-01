@@ -31,7 +31,7 @@ class matrix(object):
         self.columns=columns
         self.matrix=create_matrix(self.rows,self.columns)
         self._busy=0
-	self.marker=*
+	self.marker='*'
 
     def get_no_of_rows(self):
       	"""
@@ -45,7 +45,7 @@ class matrix(object):
 	"""
       	return self.columns
 
-    def set_marker(self,marker=*):
+    def set_marker(self,marker='*'):
       	"""
 	Set the marker used to plot the matrix
 	"""
@@ -190,7 +190,7 @@ def plot(x,y,rows=30,columns=80,test=0):
     if(test==0):
         my_matrix.plot_matrix()
     else:
-        return(my_matrix)
+        return(my_matrix.matrix)
 
 if(__name__=="__main__"):
     rows=30
